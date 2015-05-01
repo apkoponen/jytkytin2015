@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html ng-app="drum">
+	<head>
+		<meta charset="utf-8">
+		<title>Tee-se-itse JYTKY | Jytkytys.fi </title>
+		<meta name="description" content="An AngularJS drum machine">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="/public/css/comp.css">
+
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+		<script src="//cdn.rawgit.com/mgcrea/angular-strap/3d7ff4b417d02fd9c8f307d3d0a2c0f6462bec59/dist/angular-strap.min.js"></script>
+		<script src="//cdn.rawgit.com/mgcrea/angular-strap/fbe1a3579e46f91b87a93402094411948c05be7d/dist/angular-strap.tpl.min.js"></script>
+		<script src="//oss.maxcdn.com/howler.js/1.1.20/howler.min.js"></script>
+		<script type="text/javascript" src="/public/js/comp.js"></script>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="//code.jquery.com/color/jquery.color-2.1.2.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+
+		<style>
+			.no-js #loader { display: none;  }
+			.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+			.se-pre-con {
+				position: fixed;
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				z-index: 9999;
+				background: url(public/img/332.GIF) center no-repeat #fff;
+			}
+
+			html {
+				height: 100%;
+				min-height: 100%;
+			}
+
+			body {
+				min-height: 100%;
+				background: #005baa;
+				-moz-box-shadow:    inset 0 0 400px #000000;
+				-webkit-box-shadow: inset 0 0 400px #000000;
+				box-shadow:         inset 0 0 400px #000000;
+			}
+
+			iframe {
+				max-width: 100%;
+			}
+
+			.jytkytin {
+				padding: 20px 40px;
+				background: #ddd;
+				border: 2px solid #666;
+				border-radius: 20px;
+				margin-bottom: 20px;
+			}
+
+			.jytkytin-title {
+				font-weight: bold;
+				font-size: 72px;
+				line-height: 72px;
+				float: left;
+				margin-right: 20px;
+				text-shadow: 1px 1px 5px rgba(0,0,0,0.75);
+				color: #005baa;
+			}
+
+			#play.btn,
+			#reset.btn{
+				font-size: 30px;
+				line-height: 60px;
+				width: 72px;
+				text-align: center;
+			}
+
+			.suomi-disko {
+				margin: 10px auto;
+				text-align: center;
+			}
+
+			.alert {
+				padding: 10px 15px 13px 15px;
+			}
+
+			.blink {
+				position: absolute;
+				top: 50%;
+				margin-top: -30px;
+				display: none;
+				text-shadow: 3px 3px 5px rgba(0,0,0,0.75);
+				font-weight: bold;
+				color: #fff;
+				font-size: 60px;
+			}
+
+			#blink1 {
+				left: 0;
+			}
+
+			#blink2 {
+				right: 0;
+			}
+		</style>
+
+	</head>
+	<body ng-controller="MainCtrl" ng-keydown="keyPressed($event)">
+		<div class="container">
+
+
+
+			<div class="se-pre-con"></div>
+
+			<div style="position: relative; text-align: center;margin-top: 20px;">
+				<h1 id="blink1" class="blink">JYTKY!</h1>
+				<h1 id="blink2" class="blink">JYTKY!</h1>
+				<div id="player" ></div>
+			</div>
+
+			<div class="suomi-disko">
+				<div id="suomidisko" class="btn btn-lg btn-warning">KYTKE SUOMI DISKO <strong>PÄÄLLE</strong><strong style="display:none;">POIS PÄÄLTÄ</strong></div>
+				<div class="alert alert-danger">VAROITUS: Sisältää paljon välkettä. Vaatii erityisen JYTKYN koneen.</div>
+			</div>
+
+			<script>
+						var tag = document.createElement('script');
+						var interval, loopTime, blink1 = "", blink2 = "";
+
+						tag.src = "https://www.youtube.com/iframe_api";
+						var firstScriptTag = document.getElementsByTagName('script')[0];
+						firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+						// 3. This function creates an <iframe> (and YouTube player)
+						//    after the API code downloads.
+						var player;
+										function onYouTubeIframeAPIReady() {
+											player = new YT.Player('player', {
+												height: '390',
+												width: '640',
+												videoId: 'LA0et6k8j6w',
+												playerVars: {'controls': 0, 'start': 153},
+												events: {
+													'onReady': onPlayerReady,
+													'onStateChange': onPlayerStateChange
+																	//'onPlaybackRateChange': onPlaybackRateChange
+												}
+											});
+										};
+
+						function onPlayerReady(event) {
+							setTimeout(function() {
+								event.target.mute();
+								event.target.playVideo();
+								loopTime = 2000;
+								setTimeout(function() {
+									$('#play').trigger('click');
+								}, 500);
+							}, 3000);
+						};
+
+						function onPlayerStateChange(event) {
+							if (event.data == YT.PlayerState.PLAYING) {
+								clearInterval(interval);
+								interval = setInterval(loopVideo, loopTime);
+							}
+						};
+
+						function onPlaybackRateChange() {
+							clearInterval(interval);
+						};
+
+						function loopVideo() {
+							player.seekTo(153);
+						};
+
+						function setLoopTime() {
+							var speed = $('#tempo').text() / 134;
+							player.setPlaybackRate(speed);
+							loopTime = (2000 / speed);
+						};
+
+						function setBlink() {
+							clearInterval(blink1);
+							clearInterval(blink2);
+							$("#blink1").fadeTo(loopTime / 4, 0).fadeTo(loopTime / 4, 1.0).fadeTo(loopTime / 4, 0).fadeTo(loopTime / 4, 1.0);
+							$("#blink2").css('opacity', 0).fadeTo(loopTime / 4, 1).fadeTo(loopTime / 4, 0).fadeTo(loopTime / 4, 1.0).fadeTo(loopTime / 4, 0);
+							$('body').animate({backgroundColor: 'red'}, loopTime/ 4).animate({backgroundColor: 'green'},loopTime/ 4).
+												animate({backgroundColor: 'yellow'}, loopTime/ 4).animate({backgroundColor: '#005baa'},loopTime / 4);
+								
+							blink1 = setInterval(function() {
+								$("#blink1").fadeTo(loopTime / 4, 0).fadeTo(loopTime / 4, 1.0).fadeTo(loopTime / 4, 0).fadeTo(loopTime / 4, 1.0);
+								$('body').animate({backgroundColor: 'red'}, loopTime/ 4).animate({backgroundColor: 'green'},loopTime/ 4).
+												animate({backgroundColor: 'yellow'}, loopTime/ 4).animate({backgroundColor: '#005baa'},loopTime / 4);
+							}, loopTime);
+							blink2 = setInterval(function() {
+								$("#blink2").css('opacity', 0).fadeTo(loopTime / 4, 1).fadeTo(loopTime / 4, 0).fadeTo(loopTime / 4, 1.0).fadeTo(loopTime / 4, 0);
+							}, loopTime);
+						}
+
+
+						$(window).load(function() {
+							// Animate loader off screen
+							setTimeout(function() {
+								$(".se-pre-con").fadeOut("slow");
+							}, 3000);
+
+							$('#reset').on('click', function() {
+								player.pauseVideo();
+							});
+
+							$('#play').on('click', function() {
+								loopVideo();
+								player.playVideo();
+							});
+
+							$('.tempo-controls').on('click', function() {
+								setLoopTime();
+								setBlink();
+							});
+
+							$('#tempoEdit').on('change', function() {
+								setLoopTime();
+								setBlink();
+							});
+
+
+							$('#suomidisko').on('click', function() {
+								$('#suomidisko').toggleClass('btn-warning').toggleClass('btn-success');
+								$('#suomidisko strong').toggle();
+								setLoopTime();
+
+								$("#blink1").toggle();
+								$("#blink2").toggle();
+
+								if (blink1 === "") {
+									setBlink();
+								} else {
+									clearInterval(blink1);
+									clearInterval(blink2);
+									blink1 = "";
+									blink2 = "";
+								}
+
+								$('body').css('background-color', '#005baa');
+
+							});
+						});
+
+			</script>
+
+			<div id="alerts"></div>
+			<div class="jytkytin">
+				<div class="btn-toolbar" role="toolbar" ng-controller="PlayCtrl">
+					<div class="jytkytin-title">JYTKYTIN2015</div>
+					<div class="btn-group">
+						<button id="play" class="btn play" ng-class="{'active btn-danger': heartbeat, 'btn-success': !heartbeat}" ng-click="toggle()">
+							<i class="fa fa-play" ng-hide="heartbeat"></i>
+							<i class="fa fa-pause" ng-show="heartbeat"></i>
+						</button>
+						<button id="reset" class="btn btn-default btn-sm" ng-click="reset()">
+							<i class="fa fa-stop"></i>
+						</button>
+					</div>
+					<form ng-submit="editingTempo = false || changeTempo()" class="input-group tempo-controls">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="changeTempo(-1)">
+								<i class="fa fa-minus"></i>
+							</button>
+							<button type="button" class="btn btn-default" ng-hide="editingTempo" ng-click="(editingTempo = true)">
+								Jytkytystahti: <span ng-bind="t.tempo" id="tempo"></span>
+							</button>
+						</span>
+						<input id="tempoEdit" ng-model="t.tempo" type="number" class="form-control input-sm" focus-me="editingTempo" ng-show="editingTempo" ng-blur="">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="changeTempo(1)">
+								<i class="fa fa-plus"></i>
+							</button>
+						</span>
+					</form>
+					<button type="button" class="btn btn-primary" title="Saves the song as a shareable link."
+									bs-popover data-template="permalink.html" ng-click="generateRawData()">
+						<i class="fa fa-link"></i> Jaa oma JYTKYTYS-linkki kavereille
+					</button>
+					<script type="text/ng-template" id="permalink.html">
+						<div class="popover permalink">
+						<div class="arrow"></div>
+						<button class="btn btn-link btn-block btn-xs" ng-click="$hide()">sulje</button>
+						<textarea class="form-control" ng-bind="permalink()" select-all-on-click></textarea>
+						</div>
+					</script>
+				</div>
+
+				<p style="text-align: center; padding: 10px 0; font-weight: bold;">Voit säveltää oman JYTKYTYKSESI klikkaamalla alla olevia ruutuja.</p>
+
+				<div class="the-grid" ng-controller="GridCtrl">
+					<div class="row ch" ng-repeat="inst in chList()" ng-class="{cur: inst == curCh.name}">
+						<div class="col-sm-2 col-lg-2 ch-info point" ng-click="testPlay(inst)">
+							<span ng-bind="nicenames[inst]" class="ch-title"></span>
+						</div>
+						<div class="col-sm-10 col-lg-10 note-list">
+							<div class="beat" ng-repeat="b in []| range:(t.beatCount)">
+								<span class="note"
+											ng-repeat="sq in []| range:4"
+											ng-class="[noteClasses(inst, b, sq)]"
+											ng-click="toggleNote(inst, (b * 4) + sq)">
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h4 ng-show="isEmpty(t.channels)">
+					<i class="fa fa-hand-o-up"></i> Add a new channel!
+				</h4>
+			</div>
+
+			<footer style="color: #fff;position: absolute; right: 0; bottom: 0;">
+				
+			</footer>
+		</div>
+
+		<script>
+					(function(i, s, o, g, r, a, m) {
+						i['GoogleAnalyticsObject'] = r;
+						i[r] = i[r] || function() {
+							(i[r].q = i[r].q || []).push(arguments)
+						}, i[r].l = 1 * new Date();
+						a = s.createElement(o),
+										m = s.getElementsByTagName(o)[0];
+						a.async = 1;
+						a.src = g;
+						m.parentNode.insertBefore(a, m)
+					})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+					ga('create', '', 'rory.ie');
+					ga('send', 'pageview');
+		</script>
+	</body>
+</html>

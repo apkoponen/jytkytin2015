@@ -1,0 +1,144 @@
+a, button, .btn, .alert {
+  outline: none !important;
+}
+.point {
+  cursor: pointer;
+}
+.alert {
+  position: static;
+  padding: 4px 25px 4px 4px;
+  display: inline-block !important;
+}
+.btn-toolbar {
+  .btn {
+    border-radius: 0px;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .tempo-controls, .beat-controls {
+    .input-group-btn {
+      width: auto;
+    }
+    input {
+      max-width: 120px;
+    }
+  }
+  .play-info {
+    span {
+      min-width: 3em;
+      display: inline-block;
+    }
+  }
+  .instruments-list {
+    a {
+      cursor: pointer;
+      &.used {
+        cursor: default;
+        color: #c5c5c5;
+      }
+    }
+  }
+  .permalink {
+    textarea {
+      font-size: 10px;
+      padding: 2px;
+      height: 39px;
+    }
+  }
+}
+
+$l-out: #b3d7f2;
+$m-out: #3c6ad9;
+$l-back: #eef8fb;
+$m-back: #DDEEFB;
+$d-back: #c5e0fb;
+$dd-back: #85cbf8;
+
+.the-grid {
+  margin: 10px 0;
+  .ch {
+    &:last-child {
+      .ch-info {
+        border-width: 1px 0px 1px 1px;
+        border-right: solid 1px $m-out;
+      }
+      .beat {
+        border-width: 1px 0 1px 0;
+        .note {
+          height: 28px;
+        }
+      }
+    }
+    &.cur {
+      .note-list {
+        // border-left: solid 1px $m-out;
+      }
+      .ch-title {
+        font-weight: 500;
+      }
+      .note.active {
+        border: 3px #1046c5 solid;
+      }
+    }
+  }
+  .ch-info {
+    height: 30px;
+    border: solid $l-out;
+    border-width: 1px 0px 0px 1px;
+    border-right: solid 1px $m-out;
+    background-color: $m-back;
+    .ch-title {
+      font-weight: 300;
+      font-size: 14px;
+      height: 100%;
+      line-height: 26px;
+    }
+    .text-danger {
+      cursor: pointer;
+    }
+  }
+  .note-list {
+    padding: 0px;
+  }
+  .beat {
+    border: solid $l-out;
+    border-width: 1px 0 0 0;
+    display: block;
+    float: left;
+  }
+  .note {
+    float: left;
+    height: 29px;
+    width: 30px;
+    display: inline-block;
+    cursor: crosshair;
+    border-right: solid 1px $l-out;
+    &.off {
+      background-color: $l-back;
+      &:hover {
+        background-color: $m-back;
+      }
+    }
+    &.on {
+      background-color: $dd-back;
+      &:hover {
+        background-color: $d-back;
+      }
+    }
+    &:nth-child(4n+4) {
+      border-right: solid 1px $m-out;
+    }
+    &.active {
+      border: 2px rgb(70, 134, 255) solid;
+    }
+  }
+}
+
+footer {
+  margin-bottom: 30px;
+  * {
+    vertical-align: middle;   
+  }
+}
