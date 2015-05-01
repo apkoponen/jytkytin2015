@@ -329,6 +329,7 @@ drum.controller("MainCtrl", function($scope, $interval, $location, $alert, Sound
   };
   $scope.permalink = function() {
     $location.path(lastDataGenerated);
+    $scope.permalinkNow = $location.absUrl();
     return $location.absUrl();
   };
   $scope.keyPressed = function(e) {

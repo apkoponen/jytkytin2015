@@ -103,6 +103,7 @@ drum.controller("MainCtrl", ($scope, $interval, $location, $alert, Sound, Track,
     ga('send', 'event', 'permalink', 'generate')
   $scope.permalink = ->
     $location.path(lastDataGenerated)
+    $scope.permalinkNow = $location.absUrl()
     $location.absUrl()
 
   $scope.keyPressed = (e) ->
