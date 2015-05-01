@@ -151,7 +151,7 @@
 
 			<script>
 						var tag = document.createElement('script');
-						var interval = "", loopTime;
+
 						tag.src = "https://www.youtube.com/iframe_api";
 						var firstScriptTag = document.getElementsByTagName('script')[0];
 						firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
@@ -165,18 +165,21 @@
 												videoId: 'LA0et6k8j6w',
 												playerVars: {'controls': 0, 'start': 153},
 											});
-										};
+										}
+
+						var interval = "", loopTime, discoOn = false;
 
 
 						function setLoopTime() {
 							var speed = $('#tempo').text() / 134;
 							player.setPlaybackRate(speed);
 							loopTime = (2000 / speed);
-						};
+						}
 
 						function discoStart() {
 							setLoopTime();
 							player.mute();
+							player.seekTo(153);
 							player.playVideo();
 
 							$("#blink1").show();
@@ -197,10 +200,11 @@
 						}
 
 						function discoEnd() {
+							clearInterval(interval);
 							$("#blink1").hide();
 							$("#blink2").hide();
-							clearInterval(interval);
 							interval = "";
+							player.pauseVideo();
 						}
 
 
@@ -211,25 +215,28 @@
 							}, 3000);
 
 							$('#reset').on('click', function() {
-								player.pauseVideo();
+								if (discoOn) {
+									discoEnd();
+								}
 							});
 
 							$('#play').on('click', function() {
-								loopVideo();
-								player.playVideo();
+								if (discoOn) {
+									discoStart();
+								}
 							});
 
 							$('.tempo-controls').on('click', function() {
-								setLoopTime();
-								if (blink1 !== "") {
-									setBlink();
+								if (discoOn) {
+									discoEnd();
+									discoStart();
 								}
 							});
 
 							$('#tempoEdit').on('change', function() {
-								setLoopTime();
-								if (blink1 !== "") {
-									setBlink();
+								if (discoOn) {
+									discoEnd();
+									discoStart();
 								}
 							});
 
@@ -238,9 +245,11 @@
 								$('#suomidisko').toggleClass('btn-warning').toggleClass('btn-success');
 								$('#suomidisko strong').toggle();
 
-								if (interval === "") {
+								if (!discoOn) {
+									discoOn = true;
 									discoStart();
 								} else {
+									discoOn = false;
 									discoEnd();
 								}
 
