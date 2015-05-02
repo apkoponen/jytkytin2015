@@ -177,6 +177,7 @@
 						}
 
 						function discoStart() {
+							$("#player").show();
 							setLoopTime();
 							player.mute();
 							player.seekTo(153);
@@ -203,6 +204,7 @@
 							clearInterval(interval);
 							$("#blink1").hide();
 							$("#blink2").hide();
+							$("#player").hide();
 							interval = "";
 							player.pauseVideo();
 						}
@@ -212,6 +214,8 @@
 							// Animate loader off screen
 							setTimeout(function() {
 								$(".se-pre-con").fadeOut("slow");
+								$("#player").hide();
+								$("#play").trigger('click');
 							}, 3000);
 
 							$('#reset').on('click', function() {
