@@ -49,7 +49,7 @@ drum.factory("Track", (Storage) ->
 
 drum.service("Sound", ->
   @h = new Howl(
-    urls: ['public/kit.mp3', 'public/kit.ogg']
+    urls: ['public/kit-hallitus.mp3', 'public/kit-hallitus.ogg']
     sprite: instruments
     volume: 1
   )

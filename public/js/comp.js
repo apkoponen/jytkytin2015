@@ -61,7 +61,11 @@ instruments = {
   jytkytetään: [11625, 1430],
   tömähti: [13164, 1071],
   kahenKilon: [15056, 892],
-  siika: [15948, 892]
+  siika: [15948, 892],
+  hallitus: [17935, 840],
+  ha: [17935, 175],
+  kolmen: [16901, 892],
+  as: [17300, 366]
 };
 
 instrumentNames = Object.keys(instruments);
@@ -98,7 +102,11 @@ defaultTrack = {
     "jytkytetään": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     "tömähti": [],
     "kahenKilon": [],
-    "siika": []
+    "siika": [],
+    "hallitus": [],
+    "ha": [],
+    "kolmen": [],
+    "as": []
   }
 };
 
@@ -176,7 +184,7 @@ drum.factory("Track", function(Storage) {
 drum.service("Sound", function() {
   var that;
   this.h = new Howl({
-    urls: ['public/kit.mp3', 'public/kit.ogg'],
+    urls: ['public/kit-hallitus.mp3', 'public/kit-hallitus.ogg'],
     sprite: instruments,
     volume: 1
   });
@@ -259,7 +267,11 @@ drum.controller("MainCtrl", function($scope, $interval, $location, $alert, Sound
     jytkytetään: 'JYTKYTETÄÄN!',
     tömähti: 'TÖMÄHTI',
     kahenKilon: 'Kahen kilon',
-    siika: 'Siika'
+    siika: 'Siika',
+    hallitus: 'Hallitus',
+    ha: 'Ha-',
+    kolmen: 'Kolmen ässän',
+    as: 'Äs-'
   };
   $scope.setSong = function(name) {
     $scope.t = new Track(null, songs[name]);

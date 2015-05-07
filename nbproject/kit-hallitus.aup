@@ -1,0 +1,80 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="kit-hallitus_data" version="1.3.0" audacityversion="2.0.5" sel0="18.2091341410" sel1="18.2091341410" vpos="0" h="17.0472709225" zoom="671.3354786806" rate="44100.0">
+	<tags>
+		<tag name="COMMENTS" value="http://www.LataaYouTube.com"/>
+		<tag name="TITLE" value="Timo Soinin hallitus [REMIX]"/>
+	</tags>
+	<wavetrack name="kit" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="745344">
+				<waveblock start="0">
+					<simpleblockfile filename="e000062c.au" len="262144" min="-0.594042" max="0.531211" rms="0.027588"/>
+				</waveblock>
+				<waveblock start="262144">
+					<simpleblockfile filename="e0000873.au" len="262144" min="-0.849321" max="0.602795" rms="0.033748"/>
+				</waveblock>
+				<waveblock start="524288">
+					<simpleblockfile filename="e000012d.au" len="221056" min="-0.616603" max="0.543285" rms="0.106261"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="kit" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="745344">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000236.au" len="262144" min="-0.598031" max="0.482678" rms="0.025951"/>
+				</waveblock>
+				<waveblock start="262144">
+					<simpleblockfile filename="e0000357.au" len="262144" min="-0.376765" max="0.401627" rms="0.027392"/>
+				</waveblock>
+				<waveblock start="524288">
+					<simpleblockfile filename="e0000ffa.au" len="221056" min="-0.618268" max="0.543309" rms="0.106111"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Audio Track" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="16.90122449">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="45592">
+				<waveblock start="0">
+					<simpleblockfile filename="e0002cc7.au" len="45592" min="-0.517551" max="0.522645" rms="0.071106"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Audio Track" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="16.90122449">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="45592">
+				<waveblock start="0">
+					<simpleblockfile filename="e0002305.au" len="45592" min="-0.517551" max="0.522645" rms="0.071106"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Audio Track" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="17.93505669">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="37049">
+				<waveblock start="0">
+					<simpleblockfile filename="e0002bbc.au" len="37049" min="-0.306307" max="0.238899" rms="0.04182"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Audio Track" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="17.93505669">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="37049">
+				<waveblock start="0">
+					<simpleblockfile filename="e0002413.au" len="37049" min="-0.301262" max="0.223382" rms="0.03953"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>

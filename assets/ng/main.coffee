@@ -42,12 +42,16 @@ instruments =
   tömähti: [13164, 1071]
   kahenKilon: [15056, 892]
   siika: [15948, 892]
+  hallitus: [17935, 840]
+  ha: [17935, 175]
+  kolmen: [16901, 892]
+  as: [17300, 366]
 
 instrumentNames = Object.keys(instruments)
 
 songs =
   "Californication - RHCP": {"tempo":190,"beatCount":8,"channels":{"snare":[0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,1],"kick":[1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1],"ride":[1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1],"crash":[1],"splash":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0]}}
-  
+
 defaultTrack = {
   "tempo":134,
   "beatCount":8,
@@ -61,5 +65,9 @@ defaultTrack = {
     "tömähti": [],
     "kahenKilon": [],
     "siika": []
+    "hallitus": []
+    "ha": []
+    "kolmen": []
+    "as": []
   }
 }

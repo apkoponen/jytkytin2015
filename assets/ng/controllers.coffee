@@ -47,6 +47,10 @@ drum.controller("MainCtrl", ($scope, $interval, $location, $alert, Sound, Track,
     tömähti: 'TÖMÄHTI'
     kahenKilon: 'Kahen kilon'
     siika: 'Siika'
+    hallitus: 'Hallitus'
+    ha: 'Ha-'
+    kolmen: 'Kolmen ässän'
+    as: 'Äs-'
 
 
   $scope.setSong = (name) ->
