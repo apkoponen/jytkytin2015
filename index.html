@@ -168,13 +168,11 @@
 										}
 
 						var interval = "", loopTime, discoOn = false;
-
-
-						function setLoopTime() {
-							var speed = $('#tempo').text() / 134;
-							player.setPlaybackRate(speed);
-							loopTime = (2000 / speed);
-						}
+										function setLoopTime() {
+											var speed = $('#tempo').text() / 134;
+											player.setPlaybackRate(speed);
+											loopTime = (2000 / speed);
+										}
 
 						function discoStart() {
 							$("#player").show();
@@ -345,7 +343,9 @@
 					})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
 					ga('create', 'UA-62528029-1', 'auto');
-					ga('send', 'pageview');
+					ga('send', 'pageview', {
+						'page': location.pathname + location.search + location.hash
+					});
 
 		</script>
 	</body>
